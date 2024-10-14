@@ -2,6 +2,7 @@ import os
 import re
 import time
 import importlib.util
+from configExcel import URL
 
 
 def copy_and_modify_file(src_file, dest_file):
@@ -18,9 +19,7 @@ def copy_and_modify_file(src_file, dest_file):
                 or line.strip().startswith("driver = webdriver.Chrome()")
                 or line.strip().startswith("driver.quit()")
                 or line.strip().startswith("from selenium import webdriver")
-                or line.strip().startswith(
-                    "driver.get('https://www.youtube.com/?app=desktop&hl=es')"
-                )
+                or line.strip().startswith("driver.get(URL)")
             ):
                 continue
 
@@ -58,6 +57,7 @@ def copy_and_modify_file(src_file, dest_file):
         # Escribir el contenido modificado en el archivo de destino
         with open(dest_file, "w", encoding="utf-8") as file:
             file.write("# -*- coding: utf-8 -*-\n")
+            file.write("from configExcel import URL\n")
             file.write("from selenium import webdriver\n")
             file.write("from selenium.webdriver.common.by import By\n")
             file.write(
@@ -80,7 +80,7 @@ def copy_and_modify_file(src_file, dest_file):
             file.write(
                 "driver.implicitly_wait(10)  # Espera implícita de 10 segundos para que los elementos estén disponibles\n"
             )
-            file.write('driver.get("https://www.youtube.com/?app=desktop&hl=es")\n')
+            file.write("driver.get(URL)\n")
             file.write("driver.maximize_window()\n")
             file.write("# Espera a que la página cargue completamente\n")
             file.write("time.sleep(10)\n\n")
@@ -97,8 +97,7 @@ def copy_and_modify_file(src_file, dest_file):
             file.write("except TimeoutException:\n")
             file.write(
                 """
-                print("Error: Tiempo de espera excedido para encontrar el
-                elemento.")\n\n"""
+                print("Error: Tiempo de espera excedido para encontrar el elemento.")\n\n"""
             )
             file.write("# Finalizar el WebDriver\n")
             file.write("time.sleep(30)\n")

@@ -24,7 +24,7 @@ file_path2 = file_path  # Obtener el file_path desde el archivo de configuració
 data = Data_excel(file_path2)
 
 # Variables para la fila y columna a consultar
-row_index = 3  # Cambia el índice de la fila según sea necesario (comienza en 2 si la primera fila tiene encabezados)
+row_index = 2  # Cambia el índice de la fila según sea necesario (comienza en 2 si la primera fila tiene encabezados)
 col_indices = {"campo1": 0, "campo2": 1}
 
 # Exportar las variables en un diccionario
